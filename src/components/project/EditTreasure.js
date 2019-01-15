@@ -6,7 +6,6 @@ import Modal from "./Modal";
 
 class EditTreasure extends Component {
   state = {
-    modalActive: false,
     title: "",
     item1: "",
     item2: ""

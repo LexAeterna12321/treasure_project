@@ -1,6 +1,6 @@
 import React from "react";
 import TreasureItem from "./TreasureItem";
-
+import Loader from "./Loader";
 function TreasureList({ treasures }) {
   return (
     <div className="container">
@@ -15,7 +15,7 @@ function TreasureList({ treasures }) {
           })
         ) : (
           <div className="container ">
-            <p> Loading content...</p>
+            <Loader />
           </div>
         )}
       </div>

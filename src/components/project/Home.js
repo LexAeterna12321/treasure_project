@@ -4,12 +4,18 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
 import TreasureList from "./TreasureList";
+import Loader from "./Loader";
 
 export class Home extends Component {
   render() {
     const { treasures } = this.props;
-
-    if (!treasures || treasures.length === 0) {
+    if (!treasures) {
+      return (
+        <div className="container center" style={{ marginTop: "30vh" }}>
+          <Loader />
+        </div>
+      );
+    } else if (treasures.length === 0) {
       return (
         <h1 className="center">
           No Treasures created <br />
