@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { deleteTreasure } from "../store/actions/deleteTreasure";
-import { editTreasure } from "../store/actions/editTreasure";
 
 const TreasureDetail = props => {
   if (props.treasure) {
@@ -16,8 +15,8 @@ const TreasureDetail = props => {
       props.deleteTreasure(id);
       props.history.push("/");
     };
-    const editTreasure = () => {
-      props.editTreasure();
+    const onButtonClick = () => {
+      props.history.push(`/edittreasure/${id}`);
     };
 
     const id = props.match.params.id;
@@ -49,7 +48,7 @@ const TreasureDetail = props => {
           <button
             style={btnStyle}
             className="aves-effect waves-light btn "
-            onClick={editTreasure}
+            onClick={onButtonClick}
           >
             Edit Treasure
           </button>
@@ -78,7 +77,7 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
   connect(
     mapStateToProps,
-    { deleteTreasure, editTreasure }
+    { deleteTreasure }
   ),
   firestoreConnect([{ collection: "treasures" }])
 )(TreasureDetail);

@@ -33,7 +33,7 @@ const initState = {
 };
 
 const treasures = (state = initState, action) => {
-  const { err } = action;
+  const { err, updatedTreasure } = action;
 
   switch (action.type) {
     case ADD_TREASURE:
@@ -47,7 +47,7 @@ const treasures = (state = initState, action) => {
       console.log("Error in Treasure deletion", err);
       return state;
     case EDIT_TREASURE:
-      return state;
+      return { ...state, updatedTreasure };
     case EDIT_TREASURE_ERROR:
       console.log("Error in Treasure edition", err);
       return state;
