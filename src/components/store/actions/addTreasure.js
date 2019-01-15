@@ -1,3 +1,4 @@
+import { ADD_TREASURE, ADD_TREASURE_ERROR } from "../types";
 export const addTreasure = treasure => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     // make async call to database
@@ -11,11 +12,10 @@ export const addTreasure = treasure => {
         createdAt: new Date()
       })
       .then(() => {
-        console.log(firestore);
-        dispatch({ type: "ADD_TREASURE", treasure: treasure });
+        dispatch({ type: ADD_TREASURE, treasure: treasure });
       })
       .catch(err => {
-        dispatch({ type: "ADD_TREASURE_ERROR", err });
+        dispatch({ type: ADD_TREASURE_ERROR, err });
       });
   };
 };

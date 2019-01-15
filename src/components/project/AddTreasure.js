@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import addTreasure from "../store/actions/addTreasure";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
-// import Modal from "./Modal";
+
+import Modal from "./Modal";
 
 class AddTreasure extends Component {
   state = {
+    modalActive: false,
     title: "",
     item1: "",
     item2: ""
@@ -23,11 +24,15 @@ class AddTreasure extends Component {
     this.props.history.push("/");
   };
 
+  showModal = e => {
+    e.preventDefault();
+    this.setState({ modalActive: !this.state.modalActive });
+  };
+
   render() {
     return (
       <div className="container">
-        {/* <Modal /> */}
-        <h1 className="center">Create New Treasure</h1>
+        <h1 className="center">CREATE NEW TREASURE</h1>
         <div className="row">
           <form className="col s12" onSubmit={this.onFormSubmit}>
             <div className="row">
@@ -64,16 +69,20 @@ class AddTreasure extends Component {
               className="btn waves-effect waves-light"
               type="submit"
               name="action"
-              style={{ margin: "20px 0" }}
+              style={{ margin: "20px" }}
             >
               Add Treasure
             </button>
-            {/* <Modal /> */}
-            {/* <Link to="/addtreasure" className="btn waves-effect waves-light">
+
+            <button
+              className="btn waves-effect waves-light"
+              onClick={this.showModal}
+            >
               Buy Additional Storage
-            </Link> */}
+            </button>
           </form>
         </div>
+        {this.state.modalActive ? <Modal showModal={this.showModal} /> : null}
       </div>
     );
   }
@@ -87,6 +96,6 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(
   null,
-  // {addTreasure},
+
   mapDispatchToProps
 )(AddTreasure);

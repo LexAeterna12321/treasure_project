@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { deleteTreasure } from "../store/actions/deleteTreasure";
+import { editTreasure } from "../store/actions/editTreasure";
+
 const TreasureDetail = props => {
   if (props.treasure) {
     const { title, item1, item2, createdAt } = props.treasure;
@@ -10,9 +12,12 @@ const TreasureDetail = props => {
     // changes timestamp into js date object
     const parsedTime = createdAt.toDate().toLocaleString();
 
-    const onButtonClick = () => {
+    const deleteTreasure = () => {
       props.deleteTreasure(id);
       props.history.push("/");
+    };
+    const editTreasure = () => {
+      props.editTreasure();
     };
 
     const id = props.match.params.id;
@@ -25,21 +30,28 @@ const TreasureDetail = props => {
           <div className="col s12 ">
             <div className="card-panel teal">
               <span className="white-text">
-                <h1>{title}</h1>
+                <h1>{title.toUpperCase()}</h1>
                 <ul>
                   <li>{item1}</li>
                   <li>{item2}</li>
                 </ul>
-                {/* Math.floor(new Date().getTime()/1000.0) */}
-                <p>Data dodania skrzyni: {parsedTime}</p>
+                <p>Storage added: {parsedTime}</p>
               </span>
             </div>
           </div>
           <button
-            className="waves-effect waves-light btn"
-            onClick={onButtonClick}
+            style={btnStyle}
+            className="aves-effect waves-light btn "
+            onClick={deleteTreasure}
           >
             Delete Treasure
+          </button>
+          <button
+            style={btnStyle}
+            className="aves-effect waves-light btn "
+            onClick={editTreasure}
+          >
+            Edit Treasure
           </button>
         </div>
       </div>
@@ -53,6 +65,8 @@ const TreasureDetail = props => {
   }
 };
 
+const btnStyle = { padding: "30px", marginRight: "10px", lineHeight: "0" };
+
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
   const treasures = state.firestore.data.treasures;
@@ -64,7 +78,7 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
   connect(
     mapStateToProps,
-    { deleteTreasure }
+    { deleteTreasure, editTreasure }
   ),
   firestoreConnect([{ collection: "treasures" }])
 )(TreasureDetail);

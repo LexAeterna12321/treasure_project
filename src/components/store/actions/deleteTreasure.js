@@ -1,3 +1,5 @@
+import { DELETE_TREASURE, DELETE_TREASURE_ERROR } from "../types";
+
 export const deleteTreasure = id => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     // make async call to database
@@ -8,10 +10,10 @@ export const deleteTreasure = id => {
       .doc(id)
       .delete()
       .then(function() {
-        dispatch({ type: "DELETE_TREASURE", id });
+        dispatch({ type: DELETE_TREASURE, id });
       })
       .catch(function(err) {
-        dispatch({ type: "DELETE_TREASURE_ERROR", err });
+        dispatch({ type: DELETE_TREASURE_ERROR, err });
       });
   };
 };
