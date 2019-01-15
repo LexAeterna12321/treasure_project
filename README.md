@@ -1,2 +1,2 @@
-# treasuer_project
+# treasure_project
 React/Redux/Firebase
