@@ -1,9 +1,11 @@
 {
+  "homepage": "https://lexaeterna12321.github.io/treasure_project",
   "name": "own_project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "firebase": "^5.7.3",
+    "gh-pages": "^2.0.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^5.1.1",
@@ -17,6 +19,8 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
