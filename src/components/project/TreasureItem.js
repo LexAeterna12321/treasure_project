@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import chest from "../../chest.png";
 function TreasureItem({ treasure }) {
   return (
     <div className="col s12 m8">
       <div className="card">
         <div className="card-image">
-          <img src="img/chest.png" alt="chest" />
+          <img src={chest} alt="chest" />
         </div>
         <div className="card-stacked">
           <div className="card-content">
